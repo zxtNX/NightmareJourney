@@ -24,23 +24,20 @@ On va donc essayer de trouver le système gérant cette comparaison via de l'ana
 ## Utilisation de GDB
 Ainsi, via GDB on va parcourir notre binaire et chercher des indices.
 La première chose à faire est d'essayer de désassembler la fameuse fonction main de notre programme, on va essayer de le faire manière explicite tel que :
+
 ``disass main``
+
 C'est parfait, le main est directement détectable et on peut dès à présent voir sa composition à notre écran.
 La première chose qui m'intrigue est l'appel à une fonction validate, on se doutait de part le comportement du programme lorsqu'on l'a run qu'il y avait probablement une comparaison de faite, et avec ce validate, ça semble bien être le cas.
 On va donc essayer de décortiquer cette fonction validate afin de trouver potentiellement des indices pour trouver notre flag.
 
-Pour cela, on va en premier lieu set un breakpoint sur l'instruction d'appel de la fonction validate dans main : ``b *main+25``.
-Ensuite on va run le programme et désassembler validate :
-````
-r
-disass validate
-````
+Pour cela, on va en premier lieu désassembler validate : ``disass validate``.
 
 On s'aperçoit de plusieurs instructions mov qui enregistrent des valeurs dans des adresses pointées à registre rbp-OFFSET. 
-Tout ça semble fishy, ça ressemble étrangement à une processus de parcours / création de chaîne de caractères.
+Tout ça semble fishy, ça ressemble étrangement à une processus de création de chaîne de caractères.
 De ce fait, afin d'être certain de ce qui est renvoyé, on va essayer d'afficher la chaîne de caractère générée grâce à la première instruction enregistrant un caractère et la dernière. On va grâce aux adresses relatives de ces instructions créer une boucle pour afficher chaque caractère qui aura été généré.
 Tout cela se procède ainsi :
 
 ![gdb](https://github.com/zxtNX/NightmareJourney/blob/main/helithumper_rev/gdb_dump_string.png?raw=true)
 
-A noter que l'on peut faire ça après exécution des instructions, donc au mieux on set un breakpoint après la dernière instruction mov.
+A noter que l'on peut faire ça après exécution des instructions, donc au mieux on aura au préalable set un breakpoint après la dernière instruction mov soit : ``b *validate+125``.
