@@ -41,4 +41,6 @@ Tout ça semble fishy, ça ressemble étrangement à une processus de parcours /
 De ce fait, afin d'être certain de ce qui est renvoyé, on va essayer d'afficher la chaîne de caractère générée grâce à la première instruction enregistrant un caractère et la dernière. On va grâce aux adresses relatives de ces instructions créer une boucle pour afficher chaque caractère qui aura été généré.
 Tout cela se procède ainsi :
 
+![gdb](https://github.com/zxtNX/NightmareJourney/blob/main/helithumper_rev/gdb_dump_string.png?raw=true)
 
+A noter que l'on peut faire ça après exécution des instructions, donc au mieux on set un breakpoint après la dernière instruction mov.
