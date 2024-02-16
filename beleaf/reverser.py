@@ -89,10 +89,10 @@ desired_output_indexes = [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x09, 
                         0x0a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                         0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
-# Extraction des caractères ASCII de charactersList
+# Extraction des caractères ASCII de characters_list
 ascii_characters = [chr(charactersList[i]) for i in range(0, len(charactersList), 4)]
 
-# Extraction des indices de desiredOutputIndexes (en ne prenant que le premier byte de chaque groupe de 8 bytes)
+# Extraction des indices de desired_output_indexes (en ne prenant que le premier byte de chaque groupe de 8 bytes)
 indices = [desiredOutputIndexes[i] for i in range(0, len(desiredOutputIndexes), 8)]
 
 # Extraction des caractères correspondants
